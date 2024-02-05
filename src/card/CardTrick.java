@@ -50,12 +50,13 @@ public class CardTrick {
         }
 
         // Report whether the user's card is in the magic hand
-        if (found) {
-            System.out.println("Your card is in the magic hand!");
+       if (found) {
+            System.out.println("Your card is in the magic hand! You win!");
+        } else if (luckyCard.getValue() == userValue && luckyCard.getSuit().equals(userSuit)) {
+            System.out.println("You picked the lucky card! You win!");
         } else {
-            System.out.println("Your card is not in the magic hand.");
+            System.out.println("Sorry, you lost. The lucky card is not in the magic hand.");
         }
-
         // Optionally, close the scanner
         scanner.close();
     }
