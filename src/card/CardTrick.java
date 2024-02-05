@@ -8,10 +8,11 @@
  */
 package card; // Ensure this matches the package of your Card class
 
-import java.util.Random; // Import statement for Random
+
+import java.util.Random;
 import java.util.Scanner;
 
-public class CardTrick {
+public class CardGame {
     public static void main(String[] args) {
         Card[] magicHand = new Card[7];
         Random random = new Random();
@@ -24,14 +25,8 @@ public class CardTrick {
             magicHand[i] = new Card(value, suit);
         }
 
-        // Add the luckyCard with your chosen values
-        Card luckyCard = new Card(7, "Diamonds"); // Example values, you can change them
-
-        // Display the magic hand
-        System.out.println("Magic Hand Cards:");
-        for (Card card : magicHand) {
-            System.out.println(card.getValue() + " of " + card.getSuit());
-        }
+        // Add the luckyCard with hard-coded values
+        Card luckyCard = new Card(7, "Diamonds");
 
         // Ask the user to pick a card
         System.out.println("Pick a card value (1 for Ace, 11 for Jack, 12 for Queen, 13 for King): ");
@@ -49,14 +44,18 @@ public class CardTrick {
             }
         }
 
-        // Report whether the user's card is in the magic hand
-       if (found) {
-            System.out.println("Your card is in the magic hand! You win!");
-        } else if (luckyCard.getValue() == userValue && luckyCard.getSuit().equals(userSuit)) {
+        // Check if the user's card is the lucky card
+        boolean isLuckyCard = (luckyCard.getValue() == userValue && luckyCard.getSuit().equals(userSuit));
+
+        // Report whether the user's card is in the magic hand or is the lucky card
+        if (found) {
+            System.out.println("Your card is in the magic hand!");
+        } else if (isLuckyCard) {
             System.out.println("You picked the lucky card! You win!");
         } else {
             System.out.println("Sorry, you lost. The lucky card is not in the magic hand.");
         }
+
         // Optionally, close the scanner
         scanner.close();
     }
