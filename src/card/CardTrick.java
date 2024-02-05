@@ -1,32 +1,62 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
-package card;
-
 /**
- * A class that fills a magic hand of 7 cards with random Card Objects
- * and then asks the user to pick a card and searches the array of cards
- * for the match to the user's card. To be used as starting code in ICE 1
- * @author srinivsi
+ * Class Description: Brief description of what this class does.
+ * Author: Original Author's Name (if you're the original author, put your name here)
+ * Modifier: Chand Patel
+ * Student Number: 991679382
+ * Date Created: Original creation date (if known)
+ * Date Modified: Date of your modifications
  */
+package card; // Ensure this matches the package of your Card class
+
+import java.util.Random; // Import statement for Random
+import java.util.Scanner;
+
 public class CardTrick {
-    
-    public static void main(String[] args)
-    {
+    public static void main(String[] args) {
         Card[] magicHand = new Card[7];
-        
-        for (int i=0; i<magicHand.length; i++)
-        {
-            Card c = new Card();
-            //c.setValue(insert call to random number generator here)
-            //c.setSuit(Card.SUITS[insert call to random number between 0-3 here])
+        Random random = new Random();
+        Scanner scanner = new Scanner(System.in);
+
+        // Generate a hand of 7 random cards
+        for (int i = 0; i < magicHand.length; i++) {
+            int value = random.nextInt(13) + 1; // Card values from 1 to 13
+            String suit = Card.SUITS[random.nextInt(Card.SUITS.length)]; // Random suit
+            magicHand[i] = new Card(value, suit);
         }
-        
-        //insert code to ask the user for Card value and suit, create their card
-        // and search magicHand here
-        //Then report the result here
-        // add one luckcard hard code 2,clubs
+
+        // Add the luckyCard with your chosen values
+        Card luckyCard = new Card(7, "Diamonds"); // Example values, you can change them
+
+        // Display the magic hand
+        System.out.println("Magic Hand Cards:");
+        for (Card card : magicHand) {
+            System.out.println(card.getValue() + " of " + card.getSuit());
+        }
+
+        // Ask the user to pick a card
+        System.out.println("Pick a card value (1 for Ace, 11 for Jack, 12 for Queen, 13 for King): ");
+        int userValue = scanner.nextInt();
+        System.out.println("Pick a suit (1 for Hearts, 2 for Diamonds, 3 for Clubs, 4 for Spades): ");
+        int suitChoice = scanner.nextInt();
+        String userSuit = Card.SUITS[suitChoice - 1]; // Adjust for zero-based index
+
+        // Search for the card in the magic hand
+        boolean found = false;
+        for (Card card : magicHand) {
+            if (card.getValue() == userValue && card.getSuit().equals(userSuit)) {
+                found = true;
+                break;
+            }
+        }
+
+        // Report whether the user's card is in the magic hand
+        if (found) {
+            System.out.println("Your card is in the magic hand!");
+        } else {
+            System.out.println("Your card is not in the magic hand.");
+        }
+
+        // Optionally, close the scanner
+        scanner.close();
     }
-    
 }
